@@ -1,0 +1,17 @@
+{
+  "home": "Home",
+  "services": "Services",
+  "companyName": "Mr. Chi Technology",
+  "slogan": "Focusing on custom software development, technical consulting and software maintenance services",
+  "intro": "We are committed to providing innovative and efficient technical solutions to help enterprises enhance competitiveness and achieve digital transformation.",
+  "learnMore": "Learn More",
+  "servicesTitle": "Our Services",
+  "service1Title": "ERP Development",
+  "service1Desc": "Optimize internal processes and management.",
+  "service2Title": "E-commerce Platform",
+  "service2Desc": "Build secure, scalable EC solutions.",
+  "service3Title": "Web Design",
+  "service3Desc": "Responsive front & backend solutions.",
+  "service4Title": "Support & Maintenance",
+  "service4Desc": "Stable long-term tech support."
+}

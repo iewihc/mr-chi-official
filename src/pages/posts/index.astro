@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Main from '../../components/Main';
+import '../../i18n/init';
+
+const posts = await Astro.glob('./*.md');
+posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+---
+
+<Layout title='Template by Esteban Vertzner'>
+  <section class='px-4 py-8'>
+    <h1 class='mb-4 text-4xl font-bold'>Posts</h1>
+    <ul class='space-y-2'>
+      {
+        posts.map((post) => (
+          <li>
+            <a href={post.url} class='text-blue-600 hover:underline'>
+              {post.frontmatter.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Layout>

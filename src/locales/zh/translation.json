@@ -1,0 +1,17 @@
+{
+  "home": "首頁",
+  "services": "服務",
+  "companyName": "季先生科技",
+  "slogan": "精工細作的程式碼，致力實現你的想法",
+  "intro": "我們專注於網頁開發、客製化軟體開發及軟體維護服務。我們採用敏捷式開發，公開透明的讓客戶能夠參與開發流程，並交付開源解決方案。",
+  "learnMore": "Learn More",
+  "servicesTitle": "我們的服務",
+  "service1Title": "後台管理系統 (ERP,CRM)",
+  "service1Desc": "ERP 是整合企業核心流程（如進銷存、財務、人資等）的系統，旨在提升營運效率與部門協同。CRM 則聚焦於管理與優化客戶關係，透過數據分析支持銷售和市場策略。 ",
+  "service2Title": "電子商務平台 (EC)",
+  "service2Desc": "打造安全且可擴展的電商系統。",
+  "service3Title": "網站設計與開發",
+  "service3Desc": "前後端響應式開發。",
+  "service4Title": "系統維護與技術支援",
+  "service4Desc": "穩定的長期技術支援。"
+}
