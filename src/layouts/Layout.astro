@@ -1,21 +1,41 @@
 ---
 import '../styles/global.css';
+import { SEO } from 'astro-seo';
 interface Props {
-  title: string;
+  title?: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
 <html lang='en'>
   <head>
     <meta charset='UTF-8' />
-    <meta name='description' content='Astro description' />
     <meta name='viewport' content='width=device-width' />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='generator' content={Astro.generator} />
-    <title>{title}</title>
+    <SEO
+      title={title || '季先生科技有限公司'}
+      description={description ||
+        '我們專注於客製化軟體開發、技術顧問 (Consulting) 及軟體維護服務，致力於提供創新且高效的技術解決方案，協助企業提升競爭力並實現數位轉型。'}
+      openGraph={{
+        basic: {
+          title: title || '季先生科技有限公司',
+          type: 'website',
+          image: 'https://example.com/og-image.jpg'
+        }
+      }}
+      extend={{
+        meta: [
+          {
+            name: 'keywords',
+            content: '季先生, 網站開發, 軟體開發, 技術顧問, 數位轉型, 客製化軟體'
+          }
+        ]
+      }}
+    />
+    <slot name='head' />
   </head>
   <body>
     <slot />

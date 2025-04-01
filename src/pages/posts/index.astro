@@ -7,7 +7,7 @@ const posts = await Astro.glob('./*.md');
 posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
 ---
 
-<Layout title='Template by Esteban Vertzner'>
+<Layout>
   <section class='px-4 py-8'>
     <h1 class='mb-4 text-4xl font-bold'>Posts</h1>
     <ul class='space-y-2'>
