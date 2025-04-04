@@ -19,6 +19,7 @@
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.3.5",
     "astro": "^5.4.2",
+    "astro-seo": "^0.8.4",
     "i18next": "^24.2.3",
     "lucide-react": "^0.483.0",
     "react-i18next": "^15.4.1",
