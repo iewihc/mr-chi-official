@@ -1,9 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Main from '../components/Main';
+import PixelMain from '../components/PixelMain';
 import '../i18n/init';
+
+// 增加meta標籤以提升SEO
+const title = "季先生數位顧問 - 專業軟體開發與數位轉型顧問";
+const description = "專業軟體開發與數位轉型顧問，提供企業資源規劃(ERP)系統、電子商務平台(EC)、網站設計與開發、系統維護與技術支援等服務。幫助您的企業邁向數位未來。";
+const keywords = "軟體開發, 數位轉型, ERP系統, 電子商務, 網站設計, 系統維護, DevOps, 台灣, 季先生";
 ---
 
-<Layout title='Template by Esteban Vertzner'>
-  <Main client:only='react' />
+<Layout title={title} description={description}>
+	<main>
+		<PixelMain client:load />
+	</main>
 </Layout>
+
+<style>
+	/* 確保主內容佔滿整個螢幕 */
+	main {
+		width: 100%;
+		min-height: 100vh;
+	}
+</style>

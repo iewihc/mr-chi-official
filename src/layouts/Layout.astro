@@ -1,23 +1,88 @@
 ---
-import '../styles/global.css';
+import "../styles/tailwind.css";
+import "../styles/global.css";
+import "../styles/pixel-theme.css";
+
 interface Props {
-  title: string;
+	title: string;
+	description?: string;
+	keywords?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = "季先生科技 - 專業的軟體開發和技術顧問團隊", keywords = "季先生科技, 軟體開發, 技術顧問, ERP系統, 網站開發, 系統維護" } = Astro.props;
 ---
 
-<!doctype html>
-<html lang='en'>
-  <head>
-    <meta charset='UTF-8' />
-    <meta name='description' content='Astro description' />
-    <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <meta name='generator' content={Astro.generator} />
-    <title>{title}</title>
-  </head>
-  <body>
-    <slot />
-  </body>
+<!DOCTYPE html>
+<html lang="zh-TW">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		
+		<!-- SEO Meta Tags -->
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content="季先生科技" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="/季先生 logo_1080白底.jpg" />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="/季先生 logo_1080白底.jpg" />
+		
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+		<link href="https://unifont.freedesktop.org/fontdata/embedded-font/unifont_upper-15.1.04.woff2" rel="stylesheet">
+		
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	</head>
+	<body>
+		<slot />
+	</body>
 </html>
+
+<style is:global>
+	html {
+		font-family: 'Unifont', monospace;
+		background-color: #000000;
+		color: #ffffff;
+	}
+	
+	body {
+		margin: 0;
+		padding: 0;
+		min-height: 100vh;
+		position: relative;
+	}
+	
+	:focus-visible {
+		outline: 2px solid #00ff00;
+		outline-offset: 2px;
+	}
+	
+	/* 星空背景效果 */
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: radial-gradient(circle at center, #ffffff 1px, transparent 1px);
+		background-size: 50px 50px;
+		opacity: 0.1;
+		z-index: -1;
+		pointer-events: none;
+	}
+</style>

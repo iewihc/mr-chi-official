@@ -1,50 +1,342 @@
 ---
 import Layout from './Layout.astro';
+const { frontmatter } = Astro.props;
 ---
 
-<Layout>
+<Layout title={frontmatter.title} description={frontmatter.description}>
   <style>
-    @font-face {
-      font-family: 'PixelFont';
-      src: url('https://fonts.cdnfonts.com/css/press-start-2p');
-    }
-    .font-pixel {
-      font-family: monospace;
-      letter-spacing: -0.5px;
-      font-weight: bold;
-    }
-    /* 這裡調整 h1、p 等 Markdown 內容的樣式 */
-    h1 {
-      font-family: 'PixelFont', monospace;
-      letter-spacing: -0.5px;
-      font-weight: bold;
-      font-size: 3rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    p {
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    article {
-      max-width: 800px;
+    .pixel-article-container {
+      max-width: 1000px;
       margin: 2rem auto;
-      padding: 2rem;
-      background-color: #fff;
-      border: 2px solid #ccc;
-      box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.1);
-      image-rendering: pixelated;
+      padding: 1rem;
     }
-    a {
-      color: #2563eb;
-      text-decoration: underline;
+    
+    .pixel-article {
+      background-color: #000;
+      border: 2px solid #00ff00;
+      box-shadow: 6px 6px 0 rgba(0, 255, 0, 0.2);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      image-rendering: pixelated;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pixel-article::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill-rule='evenodd' d='M0 0h1v1H0V0zm0 2h1v1H0V2zm0 2h1v1H0V4zm0 2h1v1H0V6z' fill='rgba(0, 255, 0, 0.05)'/%3E%3C/svg%3E");
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .pixel-article-header {
+      border-bottom: 2px solid #00ff00;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+    }
+    
+    .pixel-article-title {
+      font-family: 'Press Start 2P', monospace;
+      color: #00ff00;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+      text-shadow: 2px 2px 0 #000;
+    }
+    
+    .pixel-article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    
+    .pixel-article-author, .pixel-article-date, .pixel-article-category {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .pixel-category-tag {
+      background-color: #00ff00;
+      color: #000;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #00ff00;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+    }
+    
+    .pixel-category-tag:hover {
+      transform: translate(1px, 1px);
+      box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+    }
+    
+    .pixel-article-content {
+      font-family: 'Unifont', monospace;
+      line-height: 1.8;
+      color: #fff;
+    }
+    
+    .pixel-article-content h1, 
+    .pixel-article-content h2, 
+    .pixel-article-content h3, 
+    .pixel-article-content h4, 
+    .pixel-article-content h5, 
+    .pixel-article-content h6 {
+      color: #00ff00;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      text-shadow: 1px 1px 0 #000;
+    }
+    
+    .pixel-article-content h1 { font-size: 1.8rem; }
+    .pixel-article-content h2 { font-size: 1.6rem; }
+    .pixel-article-content h3 { font-size: 1.4rem; }
+    .pixel-article-content h4 { font-size: 1.2rem; }
+    
+    .pixel-article-content p {
+      margin-bottom: 1.5rem;
+    }
+    
+    .pixel-article-content a {
+      color: #00ff00;
+      text-decoration: none;
+      border-bottom: 1px dashed #00ff00;
+      transition: border-bottom-style 0.3s;
+    }
+    
+    .pixel-article-content a:hover {
+      border-bottom-style: solid;
+    }
+    
+    .pixel-article-content ul, 
+    .pixel-article-content ol {
+      margin-bottom: 1.5rem;
+      padding-left: 1.5rem;
+    }
+    
+    .pixel-article-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .pixel-article-content blockquote {
+      border-left: 4px solid #00ff00;
+      padding-left: 1rem;
+      margin-left: 0;
+      margin-right: 0;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    
+    .pixel-article-content code {
+      font-family: monospace;
+      background-color: rgba(0, 255, 0, 0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 2px;
+    }
+    
+    .pixel-article-content pre {
+      background-color: #111;
+      padding: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border: 1px solid #333;
+    }
+    
+    .pixel-article-content pre code {
+      background-color: transparent;
+      padding: 0;
+    }
+    
+    .pixel-article-content img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #00ff00;
+      margin-bottom: 1.5rem;
+    }
+    
+    .pixel-article-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.5rem;
+      border: 2px solid #00ff00;
+    }
+    
+    .pixel-article-content th, 
+    .pixel-article-content td {
+      padding: 0.75rem;
+      text-align: left;
+      border: 1px solid #333;
+    }
+    
+    .pixel-article-content th {
+      background-color: #111;
+      color: #00ff00;
+    }
+    
+    .pixel-article-content tr:nth-child(even) {
+      background-color: rgba(0, 255, 0, 0.05);
+    }
+    
+    .pixel-related-posts {
+      margin-top: 3rem;
+    }
+    
+    .pixel-related-posts-title {
+      font-family: 'Press Start 2P', monospace;
+      color: #00ff00;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-shadow: 2px 2px 0 #000;
+    }
+    
+    .pixel-related-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    
+    .pixel-related-post-card {
+      background-color: #000;
+      border: 2px solid #333;
+      padding: 1rem;
+      transition: all 0.3s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 4px 4px 0 rgba(0, 255, 0, 0.1);
+    }
+    
+    .pixel-related-post-card:hover {
+      border-color: #00ff00;
+      transform: translateY(-4px);
+      box-shadow: 6px 6px 0 rgba(0, 255, 0, 0.2);
+    }
+    
+    .pixel-related-post-title {
+      color: #00ff00;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .pixel-related-post-meta {
+      font-size: 0.8rem;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+    
+    .pixel-related-post-excerpt {
+      font-size: 0.9rem;
+      color: #ccc;
+      flex-grow: 1;
+      margin-bottom: 1rem;
+    }
+    
+    .pixel-back-to-blog {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #000;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      text-decoration: none;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      box-shadow: 4px 4px 0 rgba(0, 255, 0, 0.2);
+    }
+    
+    .pixel-back-to-blog:hover {
+      background-color: #00ff00;
+      color: #000;
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 rgba(0, 255, 0, 0.2);
+    }
+    
+    /* RWD */
+    @media (max-width: 768px) {
+      .pixel-article {
+        padding: 1.5rem;
+      }
+      
+      .pixel-article-title {
+        font-size: 1.5rem;
+      }
+      
+      .pixel-related-posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .pixel-article {
+        padding: 1rem;
+      }
+      
+      .pixel-article-title {
+        font-size: 1.2rem;
+      }
+      
+      .pixel-article-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .pixel-related-posts-grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
-  <article>
-    <header></header>
-    <section>
-      <slot />
-    </section>
-  </article>
+  
+  <div class="pixel-article-container">
+    <article class="pixel-article">
+      <header class="pixel-article-header">
+        <h1 class="pixel-article-title">{frontmatter.title}</h1>
+        <div class="pixel-article-meta">
+          {frontmatter.author && (
+            <div class="pixel-article-author">
+              <span>作者:</span> {frontmatter.author}
+            </div>
+          )}
+          
+          {frontmatter.date && (
+            <div class="pixel-article-date">
+              <span>日期:</span> {new Date(frontmatter.date).toLocaleDateString('zh-TW', {year: 'numeric', month: 'long', day: 'numeric'})}
+            </div>
+          )}
+          
+          {frontmatter.category && (
+            <div class="pixel-article-category">
+              <span>分類:</span>
+              <a href={`/categories/${frontmatter.category}`} class="pixel-category-tag">
+                {frontmatter.category}
+              </a>
+            </div>
+          )}
+        </div>
+        
+        {frontmatter.description && (
+          <p class="pixel-article-description">{frontmatter.description}</p>
+        )}
+      </header>
+      
+      <div class="pixel-article-content">
+        <slot />
+      </div>
+    </article>
+    
+    <a href="/posts" class="pixel-back-to-blog">« 返回文章列表</a>
+  </div>
 </Layout>

@@ -1,25 +1,263 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Main from '../../components/Main';
-import '../../i18n/init';
-
-const posts = await Astro.glob('./*.md');
-posts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+const allPosts = await Astro.glob('./*.md');
+allPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
 ---
 
-<Layout title='Template by Esteban Vertzner'>
-  <section class='px-4 py-8'>
-    <h1 class='mb-4 text-4xl font-bold'>Posts</h1>
-    <ul class='space-y-2'>
-      {
-        posts.map((post) => (
-          <li>
-            <a href={post.url} class='text-blue-600 hover:underline'>
-              {post.frontmatter.title}
-            </a>
-          </li>
-        ))
+<Layout title="季先生 - 技術文章分享" description="季先生團隊分享的最新技術文章和知識">
+  <style>
+    .pixel-posts-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-top: 2rem;
+    }
+    
+    .pixel-posts-title {
+      font-family: 'Press Start 2P', monospace;
+      color: #00ff00;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 3px 3px 0 #000;
+    }
+    
+    .pixel-posts-subtitle {
+      font-family: 'Unifont', monospace;
+      color: #fff;
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .pixel-categories {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      padding: 1rem;
+      border-top: 2px solid #333;
+      border-bottom: 2px solid #333;
+    }
+    
+    .pixel-category-link {
+      padding: 0.5rem 1rem;
+      background-color: #000;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      text-decoration: none;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.8rem;
+      transition: all 0.3s;
+      box-shadow: 3px 3px 0 rgba(0, 255, 0, 0.2);
+    }
+    
+    .pixel-category-link:hover {
+      background-color: #00ff00;
+      color: #000;
+      transform: translate(1px, 1px);
+      box-shadow: 2px 2px 0 rgba(0, 255, 0, 0.2);
+    }
+    
+    .pixel-posts-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+    
+    .pixel-posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    .pixel-post-card {
+      background-color: #000;
+      border: 2px solid #333;
+      transition: all 0.3s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 4px 4px 0 rgba(0, 255, 0, 0.1);
+      overflow: hidden;
+    }
+    
+    .pixel-post-card:hover {
+      border-color: #00ff00;
+      transform: translateY(-5px);
+      box-shadow: 8px 8px 0 rgba(0, 255, 0, 0.2);
+    }
+    
+    .pixel-post-content {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .pixel-post-category {
+      display: inline-block;
+      background-color: #00ff00;
+      color: #000;
+      padding: 0.25rem 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .pixel-post-title {
+      font-family: 'Press Start 2P', monospace;
+      color: #00ff00;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+      text-shadow: 1px 1px 0 #000;
+    }
+    
+    .pixel-post-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      color: #888;
+    }
+    
+    .pixel-post-description {
+      color: #ccc;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+      line-height: 1.6;
+    }
+    
+    .pixel-post-link {
+      display: inline-block;
+      margin-top: auto;
+      background-color: transparent;
+      color: #00ff00;
+      padding: 0.5rem 0;
+      text-decoration: none;
+      border-bottom: 2px solid #00ff00;
+      align-self: flex-start;
+      font-weight: bold;
+      transition: all 0.3s;
+    }
+    
+    .pixel-post-link:hover {
+      color: #fff;
+      border-color: #fff;
+      transform: translateX(5px);
+    }
+    
+    .pixel-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 3rem;
+      padding-bottom: 3rem;
+    }
+    
+    .pixel-pagination-item {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      color: #00ff00;
+      border: 2px solid #00ff00;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .pixel-pagination-item:hover, .pixel-pagination-item.active {
+      background-color: #00ff00;
+      color: #000;
+    }
+    
+    /* RWD */
+    @media (max-width: 768px) {
+      .pixel-posts-title {
+        font-size: 2rem;
       }
-    </ul>
-  </section>
+      
+      .pixel-posts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .pixel-posts-title {
+        font-size: 1.5rem;
+      }
+      
+      .pixel-posts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .pixel-categories {
+        gap: 0.5rem;
+      }
+      
+      .pixel-category-link {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+      }
+    }
+  </style>
+  
+  <div class="pixel-posts-container">
+    <header class="pixel-posts-header">
+      <h1 class="pixel-posts-title">技術文章分享</h1>
+      <p class="pixel-posts-subtitle">季先生團隊分享的最新技術知識和實踐經驗，幫助您了解前沿技術動態</p>
+    </header>
+    
+    <div class="pixel-categories">
+      <a href="/posts" class="pixel-category-link">全部文章</a>
+      <a href="/categories/前端技術" class="pixel-category-link">前端技術</a>
+      <a href="/categories/後端技術" class="pixel-category-link">後端技術</a>
+      <a href="/categories/DevOps" class="pixel-category-link">DevOps</a>
+      <a href="/categories/雲端架構" class="pixel-category-link">雲端架構</a>
+    </div>
+    
+    <div class="pixel-posts-grid">
+      {allPosts.map((post) => (
+        <article class="pixel-post-card">
+          <div class="pixel-post-content">
+            {post.frontmatter.category && (
+              <span class="pixel-post-category">{post.frontmatter.category}</span>
+            )}
+            
+            <h2 class="pixel-post-title">
+              <a href={post.url}>{post.frontmatter.title}</a>
+            </h2>
+            
+            <div class="pixel-post-meta">
+              {post.frontmatter.author && (
+                <span class="pixel-post-author">{post.frontmatter.author}</span>
+              )}
+              
+              {post.frontmatter.date && (
+                <time class="pixel-post-date">
+                  {new Date(post.frontmatter.date).toLocaleDateString('zh-TW', {year: 'numeric', month: 'short', day: 'numeric'})}
+                </time>
+              )}
+            </div>
+            
+            {post.frontmatter.description && (
+              <p class="pixel-post-description">{post.frontmatter.description}</p>
+            )}
+            
+            <a href={post.url} class="pixel-post-link">閱讀更多 &rarr;</a>
+          </div>
+        </article>
+      ))}
+    </div>
+    
+    <!-- 暫時只有一頁，之後可以根據需要增加分頁功能 -->
+    <div class="pixel-pagination">
+      <a href="#" class="pixel-pagination-item active">1</a>
+    </div>
+  </div>
 </Layout>

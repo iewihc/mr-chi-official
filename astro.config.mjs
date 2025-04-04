@@ -1,15 +1,27 @@
 import { defineConfig } from 'astro/config';
-
+import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
-
-import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()],
+  integrations: [
+    react(),
+    tailwind({
+      configFile: './tailwind.config.cjs',
+      // 讓 @astrojs/tailwind 自動處理 PostCSS 配置
+      applyBaseStyles: false,
+    })
+  ],
   devToolbar: { enabled: true },
 
   vite: {
-    plugins: [tailwindcss()]
+    server: {
+      allowedHosts: ['.ngrok.io', 'localhost', 'dev.mr-chi-tech.com']
+    },
+    build: {
+      commonjsOptions: {
+        transformMixedEsModules: true
+      }
+    }
   }
 });
