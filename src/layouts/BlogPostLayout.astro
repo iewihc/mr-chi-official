@@ -35,6 +35,114 @@ const { frontmatter } = Astro.props;
       z-index: -1;
     }
     
+    /* 頂部導航欄 */
+    .pixel-nav-bar {
+      background-color: #000;
+      border-bottom: 2px solid #00ff00;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pixel-nav-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Cpath fill-rule='evenodd' d='M0 0h1v1H0V0zm0 2h1v1H0V2zm0 2h1v1H0V4zm0 2h1v1H0V6z' fill='rgba(0, 255, 0, 0.05)'/%3E%3C/svg%3E");
+      opacity: 0.1;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .pixel-logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .pixel-logo-text {
+      color: #00ff00;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+    
+    .pixel-back-home {
+      display: flex;
+      align-items: center;
+      color: #00ff00;
+      text-decoration: none;
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      position: relative;
+      padding: 0.5rem 1rem;
+      border: 2px solid #00ff00;
+      background-color: #000;
+      box-shadow: 3px 3px 0 rgba(0, 255, 0, 0.2);
+    }
+    
+    .pixel-back-home:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 rgba(0, 255, 0, 0.2);
+    }
+    
+    /* 小精靈裝飾 */
+    .pixel-sprite {
+      position: absolute;
+      z-index: 5;
+      pointer-events: none;
+    }
+    
+    .sprite-1 {
+      top: 20px;
+      right: 10%;
+      animation: float-diagonal 7s ease-in-out infinite;
+    }
+    
+    .sprite-2 {
+      bottom: 30px;
+      left: 5%;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+    
+    @keyframes float-diagonal {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(10px, -10px); }
+      50% { transform: translate(20px, 0); }
+      75% { transform: translate(10px, 10px); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+    
+    .pixel-sprite-element {
+      width: 8px;
+      height: 8px;
+      background-color: #00ff00;
+      opacity: 0.7;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    }
+    
+    .pixel-sprite-trail {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150%;
+      height: 150%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(0, 255, 0, 0.3) 0%, rgba(0, 255, 0, 0) 70%);
+      filter: blur(3px);
+      z-index: -1;
+    }
+    
     .pixel-article-header {
       border-bottom: 2px solid #00ff00;
       margin-bottom: 2rem;
@@ -298,10 +406,138 @@ const { frontmatter } = Astro.props;
         grid-template-columns: 1fr;
       }
     }
+    
+    /* 吃豆人和小精靈樣式 */
+    .pacman, .pacman-decoration {
+      position: relative;
+      border-radius: 50%;
+      background-color: #ffff00;
+      overflow: hidden;
+    }
+
+    .pacman-mouth {
+      position: absolute;
+      top: 50%;
+      right: 0;
+      width: 50%;
+      height: 0;
+      border-bottom: 2px solid #000;
+      transform-origin: left;
+      animation: chomp 0.3s linear infinite;
+    }
+
+    .pacman-decoration .pacman-mouth {
+      border-bottom-width: 3px;
+    }
+
+    @keyframes chomp {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(45deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .dot {
+      background-color: #00ff00;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+
+    .ghost-decoration {
+      border-radius: 50% 50% 0 0;
+      position: relative;
+    }
+
+    .ghost-decoration::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 25%, currentColor 25%, currentColor 50%, transparent 50%);
+      background-size: 4px 4px;
+    }
+
+    .ghost-red {
+      background-color: #ff6666;
+      animation: float 2s ease-in-out infinite, moveHorizontal 15s linear infinite alternate;
+    }
+
+    .ghost-blue {
+      background-color: #00aaff;
+      animation: float 3s ease-in-out infinite, moveHorizontal 20s linear infinite alternate;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes moveHorizontal {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-150px); }
+    }
+
+    .dots-trail .dot:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .dots-trail .dot:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+
+    .dots-trail .dot:nth-child(3) {
+      animation-delay: 0.6s;
+    }
   </style>
+  
+  <!-- 頂部導航欄 -->
+  <div class="pixel-nav-bar">
+    <a href="/" class="pixel-logo">
+      <span class="pixel-logo-text">
+        <span style="color: #888;">MR.</span> <span style="color: #00ff00;">CHI</span>
+      </span>
+    </a>
+    
+    <a href="/" class="pixel-back-home">
+      <div class="pacman mr-2" style="display: inline-block; width: 16px; height: 16px;">
+        <div class="pacman-mouth"></div>
+      </div>
+      返回首頁
+    </a>
+    
+    <!-- 小精靈裝飾 -->
+    <div class="pixel-sprite sprite-1">
+      <div class="pixel-sprite-element"></div>
+      <div class="pixel-sprite-trail"></div>
+    </div>
+    
+    <div class="pixel-sprite sprite-2">
+      <div class="pixel-sprite-element"></div>
+      <div class="pixel-sprite-trail"></div>
+    </div>
+  </div>
   
   <div class="pixel-article-container">
     <article class="pixel-article">
+      <!-- 吃豆人裝飾元素 -->
+      <div class="pacman-decoration" style="position: absolute; top: 40px; right: 30px; width: 30px; height: 30px;">
+        <div class="pacman-mouth"></div>
+      </div>
+      <div class="ghost-decoration ghost-red" style="position: absolute; top: 100px; right: 50px; width: 24px; height: 24px;"></div>
+      <div class="ghost-decoration ghost-blue" style="position: absolute; top: 150px; right: 30px; width: 24px; height: 24px;"></div>
+      <div class="dots-trail" style="position: absolute; top: 40px; right: 65px; display: flex;">
+        <div class="dot" style="width: 8px; height: 8px; margin: 0 5px;"></div>
+        <div class="dot" style="width: 8px; height: 8px; margin: 0 5px;"></div>
+        <div class="dot" style="width: 8px; height: 8px; margin: 0 5px;"></div>
+      </div>
       <header class="pixel-article-header">
         <h1 class="pixel-article-title">{frontmatter.title}</h1>
         <div class="pixel-article-meta">
@@ -337,6 +573,15 @@ const { frontmatter } = Astro.props;
       </div>
     </article>
     
-    <a href="/posts" class="pixel-back-to-blog">« 返回文章列表</a>
+    <a href="/posts" class="pixel-back-to-blog">
+      <div class="pacman" style="display: inline-block; width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;">
+        <div class="pacman-mouth"></div>
+      </div>
+      返回文章列表
+    </a>
+    <a href="/" class="pixel-back-to-blog" style="margin-left: 1rem;">
+      <div class="ghost-decoration ghost-blue" style="display: inline-block; width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;"></div>
+      返回首頁
+    </a>
   </div>
 </Layout>
