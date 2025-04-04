@@ -2,14 +2,38 @@
 import "../styles/tailwind.css";
 import "../styles/global.css";
 import "../styles/pixel-theme.css";
+import { SEO } from "astro-seo";
 
 interface Props {
 	title: string;
 	description?: string;
 	keywords?: string;
+	image?: string;
+	canonicalURL?: string;
 }
 
-const { title, description = "季先生科技 - 專業的軟體開發和技術顧問團隊", keywords = "季先生科技, 軟體開發, 技術顧問, ERP系統, 網站開發, 系統維護" } = Astro.props;
+const { 
+	title, 
+	description = "季先生科技 - 專業的軟體開發和技術顧問團隊，提供網站開發、ERP整合與技術諮詢服務", 
+	keywords = "季先生科技, 軟體開發, 技術顧問, ERP系統, 網站開發, 系統維護, 網頁設計, 台北, 系統整合", 
+	image = "/季先生 logo_1080白底.jpg",
+	canonicalURL = Astro.url.href
+} = Astro.props;
+
+// 生成結構化數據
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "季先生科技",
+  "url": "https://mr-chi-tech.com",
+  "logo": "https://mr-chi-tech.com/季先生 logo_1080白底.jpg",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "mr.chi.service@gmail.com",
+    "contactType": "customer service"
+  },
+  "description": description
+};
 ---
 
 <!DOCTYPE html>
@@ -19,33 +43,63 @@ const { title, description = "季先生科技 - 專業的軟體開發和技術�
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
 		
-		<!-- SEO Meta Tags -->
-		<meta name="description" content={description} />
-		<meta name="keywords" content={keywords} />
-		<meta name="author" content="季先生科技" />
+		<SEO
+			title={title}
+			description={description}
+			canonical={canonicalURL}
+			openGraph={{
+				basic: {
+					title: title,
+					type: "website",
+					image: image,
+					url: canonicalURL,
+				},
+				optional: {
+					siteName: "季先生科技",
+					description: description,
+					locale: "zh_TW",
+				},
+				image: {
+					alt: "季先生科技 Logo",
+				},
+			}}
+			twitter={{
+				card: "summary_large_image",
+				site: "@mrchitech",
+				title: title,
+				description: description,
+				image: image,
+				imageAlt: "季先生科技 Logo",
+			}}
+			extend={{
+				meta: [
+					{ name: "keywords", content: keywords },
+					{ name: "author", content: "季先生科技" },
+					{ name: "theme-color", content: "#00ff00" },
+					{ name: "mobile-web-app-capable", content: "yes" },
+					{ name: "apple-mobile-web-app-capable", content: "yes" },
+					{ name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
+				],
+				link: [
+					{ rel: "manifest", href: "/manifest.json" },
+					{ rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+				],
+			}}
+		/>
 		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content="/季先生 logo_1080白底.jpg" />
+		<!-- 結構化數據 -->
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 		
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={Astro.url} />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content="/季先生 logo_1080白底.jpg" />
+		<!-- 預加載字體以提高性能 -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"></noscript>
 		
-		<!-- Fonts -->
-		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-		<link href="https://unifont.freedesktop.org/fontdata/embedded-font/unifont_upper-15.1.04.woff2" rel="stylesheet">
-		
-		<!-- Font Awesome -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<!-- 字體 -->
+		<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 	</head>
 	<body>
 		<slot />
@@ -54,9 +108,10 @@ const { title, description = "季先生科技 - 專業的軟體開發和技術�
 
 <style is:global>
 	html {
-		font-family: 'Unifont', monospace;
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Unifont', monospace;
 		background-color: #000000;
 		color: #ffffff;
+		scroll-behavior: smooth;
 	}
 	
 	body {
@@ -141,5 +196,41 @@ const { title, description = "季先生科技 - 專業的軟體開發和技術�
 		0% { transform: translateY(0); }
 		50% { transform: translateY(-3px); }
 		100% { transform: translateY(0); }
+	}
+	
+	/* 增強 RWD 的全域樣式 */
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+	
+	/* 提高對比度以改善可訪問性 */
+	a:focus {
+		outline: 2px solid #00ff00;
+		outline-offset: 2px;
+	}
+	
+	/* 針對螢幕閱讀器的可訪問性類 */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
+	
+	/* 打印樣式優化 */
+	@media print {
+		body {
+			background: white;
+			color: black;
+		}
+		body::before {
+			display: none;
+		}
 	}
 </style>
