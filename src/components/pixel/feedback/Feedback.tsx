@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { feedbacks } from '../data';
 
 interface FeedbackProps {
@@ -9,11 +8,6 @@ interface FeedbackProps {
 
 const Feedback: React.FC<FeedbackProps> = ({ language, oddSection }) => {
   const [activeFeedbackIndex, setActiveFeedbackIndex] = useState(0);
-
-  // 手動切換反饋
-  const handleFeedbackChange = (index: number) => {
-    setActiveFeedbackIndex(index);
-  };
 
   return (
     <section id="feedback" className={`px-4 py-24 ${oddSection ? 'bg-black' : 'bg-[#0a0a0a]'}`}>
@@ -25,82 +19,56 @@ const Feedback: React.FC<FeedbackProps> = ({ language, oddSection }) => {
           </span>
         </h2>
         
-        <div className="max-w-5xl mx-auto">
-          <div className="relative">
-            <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10">
-              <button 
-                className="carousel-control left-control p-2"
-                onClick={() => {
-                  const carousel = document.querySelector('.feedbacks-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: -400, behavior: 'smooth' });
-                  }
-                }}
-              >
-                <FiArrowLeft size={24} />
-              </button>
+        <div className="max-w-6xl mx-auto">
+          <div className="relative mt-12">
+            {/* 裝飾元素 */}
+            <div className="absolute -top-6 right-[15%] z-10 animate-float-fast" style={{ animationDelay: '0.3s' }}>
+              <div className="w-6 h-6 bg-[#ffcc00] opacity-70 rotate-45"></div>
+              <div className="pixel-trail"></div>
+            </div>
+            <div className="absolute -bottom-8 left-[30%] z-10 animate-pulse-slow" style={{ animationDelay: '2.1s' }}>
+              <div className="w-3 h-3 bg-[#66ff99] opacity-80 rounded-full"></div>
+              <div className="pixel-trail"></div>
             </div>
             
-            <div className="feedbacks-carousel flex overflow-x-auto pb-8 hide-scrollbar relative">
-              {/* 反饋輪播上的小精靈 */}
-              <div className="absolute -top-6 right-[15%] z-10 animate-float-fast" style={{ animationDelay: '0.3s' }}>
-                <div className="w-6 h-6 bg-[#ffcc00] opacity-70 rotate-45"></div>
-                <div className="pixel-trail"></div>
-              </div>
-              <div className="absolute -bottom-8 left-[30%] z-10 animate-pulse-slow" style={{ animationDelay: '2.1s' }}>
-                <div className="w-3 h-3 bg-[#66ff99] opacity-80 rounded-full"></div>
-                <div className="pixel-trail"></div>
-              </div>
-              
-              {feedbacks.map((feedback, index) => (
-                <div key={index} className="feedback-card flex-none w-96 mr-10 p-8 border border-[#00ff00] bg-black rounded-lg transition-transform transform hover:scale-105">
-                  <div className="flex items-center mb-6">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden bg-green-900 mr-4">
+            {/* 使用網格布局代替滾動 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {feedbacks.slice(0, 6).map((feedback, index) => (
+                <div key={index} className="feedback-card border border-[#00ff00] bg-black rounded-lg p-6 transition-transform transform hover:scale-105 h-full flex flex-col">
+                  <div className="flex items-center mb-4">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden bg-green-900 mr-4 flex-shrink-0">
                       <div className="absolute inset-0 flex items-center justify-center text-xl text-white">
                         {(feedback.name || feedback.englishName).charAt(0)}
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-bold text-lg">{language === 'zh' ? feedback.name : feedback.englishName}</h4>
+                      <h4 className="font-bold">{language === 'zh' ? feedback.name : feedback.englishName}</h4>
                       <p className="text-gray-500 text-sm">{language === 'zh' ? feedback.company : feedback.englishCompany}</p>
                     </div>
                   </div>
-                  <p className="text-gray-400 italic text-base leading-relaxed min-h-[100px]">
+                  <p className="text-gray-400 italic flex-grow line-clamp-4">
                     "{language === 'zh' ? feedback.content : feedback.englishContent}"
                   </p>
+                  
+                  {/* 星級評分 */}
+                  <div className="flex mt-4 justify-end">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className={`text-lg ${i < feedback.rating ? 'text-[#ffcc00]' : 'text-gray-700'}`}>★</span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
-            
-            <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10">
-              <button 
-                className="carousel-control right-control p-2"
-                onClick={() => {
-                  const carousel = document.querySelector('.feedbacks-carousel');
-                  if (carousel) {
-                    carousel.scrollBy({ left: 400, behavior: 'smooth' });
-                  }
-                }}
-              >
-                <FiArrowRight size={24} />
-              </button>
-            </div>
           </div>
           
-          {/* 像素風格的吃豆人輪播指示點 */}
-          <div className="carousel-dots flex justify-center mt-8 items-center">
+          {/* 裝飾元素 */}
+          <div className="flex justify-center mt-8 items-center">
             <div className="flex items-center">
-              <div className="w-5 h-5 bg-[#ffff00] rounded-full mr-2 animate-pulse-slow pacman">
+              <div className="w-5 h-5 bg-[#ffff00] rounded-full animate-pulse-slow pacman">
                 <div className="pacman-mouth"></div>
               </div>
-              {feedbacks.map((_, index) => (
-                <div 
-                  key={index}
-                  className={`w-3 h-3 rounded-full mx-1 ${index === activeFeedbackIndex ? 'bg-[#ffaa00]' : 'bg-[#00ff00]'} dot`}
-                  onClick={() => handleFeedbackChange(index)}
-                ></div>
-              ))}
-              <div className="w-3 h-3 bg-[#ff9999] rounded-full ml-1 ghost"></div>
+              <div className="mx-2 text-[#00ff00]">•••</div>
+              <div className="w-3 h-3 bg-[#ff9999] rounded-full ghost"></div>
             </div>
           </div>
         </div>

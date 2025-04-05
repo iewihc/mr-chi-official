@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { cases } from '../data';
 
 interface ProjectsProps {
@@ -25,35 +24,22 @@ const Projects: React.FC<ProjectsProps> = ({ language, oddSection }) => {
           </span>
         </h2>
         
-        <div className="relative max-w-5xl mx-auto">
-          <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 z-10">
-            <button 
-              className="carousel-control left-control p-2"
-              onClick={() => {
-                const carousel = document.querySelector('.projects-carousel');
-                if (carousel) {
-                  carousel.scrollBy({ left: -300, behavior: 'smooth' });
-                }
-              }}
-            >
-              <FiArrowLeft size={24} />
-            </button>
+        <div className="relative max-w-6xl mx-auto">
+          {/* 輪播圖上的小精靈裝飾 */}
+          <div className="absolute -top-8 left-[10%] z-10 animate-float-slow" style={{ animationDelay: '0.7s' }}>
+            <div className="w-5 h-5 bg-[#00ff00] opacity-70 rounded-sm"></div>
+            <div className="pixel-trail"></div>
+          </div>
+          <div className="absolute -bottom-6 right-[20%] z-10 animate-pulse-medium" style={{ animationDelay: '1.5s' }}>
+            <div className="w-4 h-4 bg-[#ffcc00] opacity-60 rounded-full"></div>
+            <div className="pixel-trail"></div>
           </div>
           
-          <div className="projects-carousel flex overflow-x-auto pb-8 hide-scrollbar relative">
-            {/* 輪播圖上的小精靈 */}
-            <div className="absolute -top-8 left-[10%] z-10 animate-float-slow" style={{ animationDelay: '0.7s' }}>
-              <div className="w-5 h-5 bg-[#00ff00] opacity-70 rounded-sm"></div>
-              <div className="pixel-trail"></div>
-            </div>
-            <div className="absolute -bottom-6 right-[20%] z-10 animate-pulse-medium" style={{ animationDelay: '1.5s' }}>
-              <div className="w-4 h-4 bg-[#ffcc00] opacity-60 rounded-full"></div>
-              <div className="pixel-trail"></div>
-            </div>
-            
-            {cases.map((caseItem, index) => (
+          {/* 網格布局取代水平滾動 */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            {cases.slice(0, 6).map((caseItem, index) => (
               <div key={index} 
-                className="pixel-project-card flex-none w-80 mr-6 overflow-hidden border border-[#00ff00] bg-black p-6 rounded-lg 
+                className="pixel-project-card overflow-hidden border border-[#00ff00] bg-black p-6 rounded-lg 
                           transition-all duration-300 transform hover:scale-105 cursor-crosshair relative group"
                 onClick={() => window.location.href = `/posts/case-${index+1}`}
               >
@@ -81,7 +67,7 @@ const Projects: React.FC<ProjectsProps> = ({ language, oddSection }) => {
                 <h3 className="text-xl font-bold mb-3 text-[#00ff00]">
                   {language === 'zh' ? caseItem.title : caseItem.englishTitle}
                 </h3>
-                <p className="text-gray-400 mb-6">
+                <p className="text-gray-400 mb-6 line-clamp-3">
                   {language === 'zh' ? caseItem.description : caseItem.englishDescription}
                 </p>
                 <div className="mt-auto text-right pr-2">
@@ -95,37 +81,15 @@ const Projects: React.FC<ProjectsProps> = ({ language, oddSection }) => {
               </div>
             ))}
           </div>
-          
-          <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10">
-            <button 
-              className="carousel-control right-control p-2"
-              onClick={() => {
-                const carousel = document.querySelector('.projects-carousel');
-                if (carousel) {
-                  carousel.scrollBy({ left: 300, behavior: 'smooth' });
-                }
-              }}
-            >
-              <FiArrowRight size={24} />
-            </button>
-          </div>
         </div>
         
-        {/* 像素風格的吃豆人輪播指示點 */}
-        <div className="carousel-dots flex justify-center mt-6 items-center">
-          <div className="flex items-center">
-            <div className="w-5 h-5 bg-[#ffff00] rounded-full mr-2 animate-pulse-slow pacman">
-              <div className="pacman-mouth"></div>
-            </div>
-            {cases.map((_, index) => (
-              <div 
-                key={index}
-                className={`w-3 h-3 rounded-full mx-1 ${index === activeCaseIndex ? 'bg-[#00ffff]' : 'bg-[#00ff00]'} dot`}
-                onClick={() => handleCaseChange(index)}
-              ></div>
-            ))}
-            <div className="w-3 h-3 bg-[#ff6666] rounded-full ml-1 ghost"></div>
-          </div>
+        {/* 顯示瀏覽更多案例按鈕 */}
+        <div className="text-center mt-12">
+          <a href="/posts" className="inline-block border-2 border-[#00ff00] bg-black text-[#00ff00] 
+                                     px-6 py-3 rounded-lg hover:bg-[#00ff00] hover:text-black 
+                                     transition-colors duration-300 cursor-pointer">
+            <span className="font-pixel">{language === 'zh' ? '瀏覽更多案例' : 'View More Cases'}</span>
+          </a>
         </div>
       </div>
     </section>

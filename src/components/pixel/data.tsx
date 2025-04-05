@@ -89,7 +89,8 @@ export const feedbacks: Feedback[] = [
     englishCompany: "Taiwan Trading Enterprise",
     content: "本來只是抱著試試看的心態找季先生科技，沒想到開發過程中問題解得比我們內部還快，連流程都幫我們一起優化了。",
     englishContent: "I originally approached Mr. Chi Tech with a trial mentality, but didn't expect that they would solve problems faster than our internal team during the development process, and even helped us optimize our workflows.",
-    avatar: "/avatar1.jpg"
+    avatar: "/avatar1.jpg",
+    rating: 5
   },
   {
     name: "課程平台創辦人",
@@ -98,7 +99,8 @@ export const feedbacks: Feedback[] = [
     englishCompany: "Educational Technology Company",
     content: "很少有工程師願意聽我們這種非技術背景講話，而且還能聽懂。我們遇到的每個難題，他們都用實際方式解決。",
     englishContent: "Few engineers are willing to listen to non-technical backgrounds like us, and still understand. They solved every challenge we encountered in a practical way.",
-    avatar: "/avatar2.jpg"
+    avatar: "/avatar2.jpg",
+    rating: 4
   },
   {
     name: "醫療儀器設備商負責人",
@@ -107,7 +109,8 @@ export const feedbacks: Feedback[] = [
     englishCompany: "Medical Equipment Supplier",
     content: "合作起來最放心的一點是他們的回覆速度跟改版彈性，真的有把我們的專案當一回事。",
     englishContent: "The most reassuring aspect of working with them is their response speed and flexibility for revisions. They truly treated our project as a priority.",
-    avatar: "/avatar3.jpg"
+    avatar: "/avatar3.jpg",
+    rating: 5
   }
 ];
 

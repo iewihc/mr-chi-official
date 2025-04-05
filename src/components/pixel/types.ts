@@ -26,6 +26,7 @@ export interface Feedback {
   content: string;
   englishContent: string;
   avatar: string;
+  rating: number; // 客戶評分 (1-5)
 }
 
 // DevOps步驟介面
