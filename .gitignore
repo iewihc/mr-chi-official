@@ -42,3 +42,7 @@ pnpm-debug.log*
 # 日誌文件
 *.log
 logs
+
+# pnpm
+pnpm-lock.yaml
+.pnpm-store/
