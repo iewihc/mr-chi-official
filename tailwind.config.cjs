@@ -64,11 +64,5 @@ module.exports = {
     disableColorOpacityUtilitiesByDefault: true,
     removeDeprecatedGapUtilities: true,
   },
-  // 生產環境優化
-  purge: {
-    enabled: process.env.NODE_ENV === 'production',
-    options: {
-      safelist: ['dark'],
-    },
-  },
+  safelist: ['dark'],
 } 

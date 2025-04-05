@@ -79,6 +79,7 @@ git push -u origin main
    - 查看構建日誌了解錯誤原因
    - 確認 Node.js 和 PNPM 版本設置是否正確
    - 測試本地構建是否成功 (`pnpm run build`)
+   - 如果出現 "terser not found" 錯誤，請運行 `pnpm add -D terser` 安裝缺失的依賴
 
 3. **Cloudflare 問題**：
    - 確認 DNS 記錄是否正確配置
