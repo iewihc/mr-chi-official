@@ -1,0 +1,36 @@
+[build]
+  command = "pnpm run build"
+  publish = "dist"
+  
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_FLAGS = "--version"
+
+[dev]
+  command = "pnpm run dev"
+  port = 4321
+  targetPort = 4321
+
+# 設定自動使用 Netlify 的 Pretty URLs 功能
+[build.processing]
+  skip_processing = false
+[build.processing.html]
+  pretty_urls = true
+
+# 設定頁面轉向規則
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions = {Role = ["guest"]}
+
+# 設定標頭
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';" 

@@ -1,0 +1,53 @@
+{
+  "zone": "${CLOUDFLARE_ZONE_ID}",
+  "dns_records": [
+    {
+      "name": "@",
+      "type": "CNAME",
+      "content": "${NETLIFY_SITE_URL}",
+      "ttl": 1,
+      "proxied": true
+    },
+    {
+      "name": "www",
+      "type": "CNAME",
+      "content": "${NETLIFY_SITE_URL}",
+      "ttl": 1,
+      "proxied": true
+    }
+  ],
+  "page_rules": [
+    {
+      "targets": [
+        {
+          "target": "url",
+          "constraint": {
+            "operator": "matches",
+            "value": "mr-chi-tech.com/*"
+          }
+        }
+      ],
+      "actions": {
+        "always_use_https": true,
+        "browser_cache_ttl": 86400,
+        "cache_level": "aggressive",
+        "edge_cache_ttl": {
+          "ttl": 86400
+        }
+      }
+    }
+  ],
+  "settings": {
+    "ssl": "strict",
+    "always_use_https": true,
+    "automatic_https_rewrites": true,
+    "opportunistic_encryption": true,
+    "tls_1_3": "on",
+    "min_tls_version": "1.2",
+    "browser_check": true,
+    "waf": "on",
+    "cache_level": "aggressive",
+    "browser_cache_ttl": 86400,
+    "security_level": "medium"
+  }
+} 
