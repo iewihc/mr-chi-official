@@ -24,8 +24,7 @@
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
-  conditions = {Role = ["guest"]}
+  force = true
 
 # 設定標頭
 [[headers]]

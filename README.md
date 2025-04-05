@@ -1,18 +1,18 @@
-# Astro + React + Tailwind
+# 季先生官方網站 (Mr. Chi Official Website)
 
-## 🔍 Overview
+[![Netlify Status](https://api.netlify.com/api/v1/badges/174b4dee-cf75-45d3-abd3-33b2e7b07997/deploy-status)](https://app.netlify.com/sites/mr-chi/deploys)
 
-Here you will find a template to create an `Astro` project that uses `React` and `Tailwind`. Also it has `eslint` and `prettier` configured.
+基於 Astro + React + Tailwind 構建的季先生官方網站。
 
-Run the following command to create a project with the template:
+## 🔍 部署狀態
 
-```sh
-pnpm create astro@latest <project-name> -- --template evertzner/astro-react-tailwind-template --yes
-```
+- 網站: [https://mr-chi-tech.com](https://mr-chi-tech.com)
+- 部署平台: Netlify
+- CDN/DNS: Cloudflare
 
-## 🚀 Project Structure
+## 🚀 專案架構
 
-Inside of your Astro project, you'll see the following folders and files:
+此 Astro 專案包含以下文件夾和文件:
 
 ```text
 /
@@ -38,30 +38,30 @@ Inside of your Astro project, you'll see the following folders and files:
 └── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Astro 會在 `src/pages/` 目錄中尋找 `.astro` 或 `.md` 文件。每個頁面都會根據其文件名暴露為路由。
 
-Any static assets, like images, can be placed in the `public/` directory.
+任何靜態資產，如圖片，都可以放在 `public/` 目錄中。
 
-## 🧞 Commands
+## 🧞 指令
 
-All commands are run from the root of the project, from a terminal:
+所有指令都從專案根目錄的終端機運行:
 
-| Command            | Action                                       |
-| :----------------- | :------------------------------------------- |
-| `pnpm install`     | Installs dependencies                        |
-| `pnpm run dev`     | Starts local dev server at `localhost:4321`  |
-| `pnpm run build`   | Build your production site to `./dist/`      |
-| `pnpm run preview` | Preview your build locally, before deploying |
-| `pnpm run format`  | Format the document using Prettier           |
-| `pnpm run check`   | Check types using `astro check`              |
-| `pnpm run lint`    | Check linting and format                     |
+| 指令               | 操作                                      |
+| :----------------- | :---------------------------------------- |
+| `pnpm install`     | 安裝依賴                                  |
+| `pnpm run dev`     | 啟動本地開發服務器，位址為 `localhost:4321` |
+| `pnpm run build`   | 構建生產網站到 `./dist/`                  |
+| `pnpm run preview` | 在部署前本地預覽構建                        |
+| `pnpm run format`  | 使用 Prettier 格式化文檔                  |
+| `pnpm run check`   | 使用 `astro check` 檢查類型               |
+| `pnpm run lint`    | 檢查代碼風格與格式                         |
 
 ## Husky
 
-To initiate husky run the following command.
+要初始化 husky，請運行以下命令:
 
 ```sh
 npx husky init
 ```
 
-Replace `pre-commit` file content with content from `_pre-commit`
+用 `_pre-commit` 的內容替換 `pre-commit` 文件內容

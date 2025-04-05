@@ -1,0 +1,2 @@
+# 確保所有路徑都被重定向到 index.html 以支持 SPA 路由
+/*    /index.html   200 

@@ -1,0 +1,28 @@
+# Cloudflare DNS 設定指南
+
+## 正確的 DNS 記錄
+
+1. 修改 A 記錄:
+   - 名稱: mr-chi-tech.com (根域名 @)
+   - 將其指向 Netlify 指定的 IP (不是 75.2.60.5)
+   - 打開 Proxy 狀態 (橙色雲朵)
+
+2. 修改 CNAME 記錄:
+   - 刪除現有的 CNAME www -> mr-chi-tech.com
+   - 創建新的 CNAME www -> {您的Netlify域名}.netlify.app
+   - 確保 Proxy 狀態為開啟 (橙色雲朵)
+
+## 檢查 Netlify 設定
+
+1. 在 Netlify 控制台中：
+   - 進入 "Site settings" > "Domain management"
+   - 確認 mr-chi-tech.com 和 www.mr-chi-tech.com 都已添加為自定義域名
+   - 確保已啟用 HTTPS
+
+## 等待 DNS 傳播
+
+DNS 變更可能需要幾分鐘到幾小時才能完全傳播。
+
+請使用以下工具檢查您的 DNS 設定是否正確傳播：
+- https://dnschecker.org
+- https://whatsmydns.net 
