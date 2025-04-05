@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 const allPosts = await Astro.glob('./*.md');
-allPosts.sort((a, b) => new Date(b.frontmatter.date) - new Date(a.frontmatter.date));
+allPosts.sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
 
 <Layout title="季先生 - 技術文章分享" description="季先生團隊分享的最新技術文章和知識">

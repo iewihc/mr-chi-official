@@ -640,8 +640,11 @@ const { frontmatter } = Astro.props;
         // 包裝表格於容器中以支持水平滾動
         const wrapper = document.createElement('div');
         wrapper.className = 'table-container';
-        table.parentNode.insertBefore(wrapper, table);
-        wrapper.appendChild(table);
+        // 修復 parentNode 可能為 null 的錯誤
+        if (table.parentNode) {
+          table.parentNode.insertBefore(wrapper, table);
+          wrapper.appendChild(table);
+        }
         
         // 修復表格顯示問題
         const rows = table.querySelectorAll('tr');
@@ -651,22 +654,33 @@ const { frontmatter } = Astro.props;
         if (headerRow) {
           // 確保第一行使用 th 元素
           const firstRowCells = headerRow.querySelectorAll('td, th');
-          firstRowCells.forEach((cell, cellIndex) => {
+          firstRowCells.forEach((cell) => {
             // 如果是 td，替換為 th
             if (cell.tagName.toLowerCase() === 'td') {
               const th = document.createElement('th');
               th.innerHTML = cell.innerHTML;
-              cell.parentNode.replaceChild(th, cell);
-              cell = th;
+              // 修復 parentNode 可能為 null 的錯誤
+              if (cell.parentNode) {
+                cell.parentNode.replaceChild(th, cell);
+                // 由於 cell 已被替換，我們需要對 th 進行操作
+                // 增強邊框效果 - 使用 setAttribute 而不是直接修改 style
+                th.setAttribute('style', 'border-bottom: 2px solid #00ff00 !important; position: relative;');
+                
+                // 添加視覺增強效果
+                const bottomLine = document.createElement('div');
+                bottomLine.setAttribute('style', 'position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: #00ff00; box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);');
+                th.appendChild(bottomLine);
+              }
+            } else {
+              // 這是已經是 th 的情況
+              // 增強邊框效果 - 使用 setAttribute 而不是直接修改 style
+              cell.setAttribute('style', 'border-bottom: 2px solid #00ff00 !important; position: relative;');
+              
+              // 添加視覺增強效果
+              const bottomLine = document.createElement('div');
+              bottomLine.setAttribute('style', 'position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: #00ff00; box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);');
+              cell.appendChild(bottomLine);
             }
-            
-            // 增強邊框效果
-            cell.style.cssText += 'border-bottom: 2px solid #00ff00 !important; position: relative;';
-            
-            // 添加視覺增強效果
-            const bottomLine = document.createElement('div');
-            bottomLine.style.cssText = 'position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background-color: #00ff00; box-shadow: 0 0 5px rgba(0, 255, 0, 0.5);';
-            cell.appendChild(bottomLine);
           });
         }
         
@@ -675,43 +689,42 @@ const { frontmatter } = Astro.props;
           if (rowIndex === 0) return; // 跳過表頭行
           
           const cells = row.querySelectorAll('td');
-          cells.forEach((cell, cellIndex) => {
-            // 增強邊框效果
-            cell.style.cssText += 'border: 1px solid #00ff00 !important;';
+          cells.forEach((cell) => {
+            // 增強邊框效果 - 使用 setAttribute 而不是直接修改 style
+            cell.setAttribute('style', 'border: 1px solid #00ff00 !important;');
             
             // 儲存格的懸停效果
             cell.addEventListener('mouseenter', () => {
-              cell.style.backgroundColor = 'rgba(0, 255, 0, 0.15)';
+              cell.setAttribute('style', 'border: 1px solid #00ff00 !important; background-color: rgba(0, 255, 0, 0.15);');
             });
             
             cell.addEventListener('mouseleave', () => {
-              cell.style.backgroundColor = '';
+              cell.setAttribute('style', 'border: 1px solid #00ff00 !important;');
             });
           });
           
           // 行的懸停效果
           row.addEventListener('mouseenter', () => {
-            row.style.backgroundColor = 'rgba(0, 255, 0, 0.1)';
+            row.setAttribute('style', 'background-color: rgba(0, 255, 0, 0.1);');
           });
           
           row.addEventListener('mouseleave', () => {
             if (rowIndex % 2 === 1) { // 偶數行
-              row.style.backgroundColor = 'rgba(0, 255, 0, 0.05)';
+              row.setAttribute('style', 'background-color: rgba(0, 255, 0, 0.05);');
             } else {
-              row.style.backgroundColor = '';
+              row.setAttribute('style', '');
             }
           });
         });
         
         // 添加表格標題（如果不存在）
-        if (table.caption === null) {
+        // 使用 getElementsByTagName 檢查是否有 caption 元素
+        const captions = table.getElementsByTagName('caption');
+        if (captions.length === 0) {
           const caption = document.createElement('caption');
-          caption.style.cssText = 'caption-side: top; text-align: center; padding: 10px; color: #00ff00; font-weight: bold;';
+          caption.setAttribute('style', 'caption-side: top; text-align: center; padding: 10px; color: #00ff00; font-weight: bold; position: absolute; clip: rect(0, 0, 0, 0); height: 1px; width: 1px; margin: -1px; overflow: hidden;');
           caption.textContent = '表格';
           table.insertBefore(caption, table.firstChild);
-          
-          // 隱藏表格標題（僅用於可訪問性）
-          caption.style.cssText += 'position: absolute; clip: rect(0, 0, 0, 0); height: 1px; width: 1px; margin: -1px; overflow: hidden;';
         }
       });
     });

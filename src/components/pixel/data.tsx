@@ -1,8 +1,6 @@
-import React from 'react';
 import { 
   FiDatabase, FiShoppingCart, FiMonitor, FiSettings, 
-  FiServer, FiCloud, FiSmartphone, FiShield, FiBarChart,
-  FiCode, FiGitPullRequest, FiPackage, FiCheck, FiUploadCloud, FiActivity, FiPenTool, FiImage, FiLayers, FiTarget, FiEye, FiAward 
+  FiServer, FiCloud, FiBarChart
 } from 'react-icons/fi';
 import type { ServiceItem, CaseItem, Feedback, DevOpsStep } from './types';
 

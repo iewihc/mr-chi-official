@@ -15,6 +15,11 @@ pnpm-debug.log*
 
 # environment variables
 .env
+.env.*
+*.env
+.env.local
+.env.development
+.env.test
 .env.production
 
 # macOS-specific files
@@ -22,3 +27,18 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Cloudflare 機密
+.cloudflare/secrets.json
+
+# Netlify 機密
+.netlify/state.json
+
+# 暫存檔案
+.cache
+.eslintcache
+.vscode
+
+# 日誌文件
+*.log
+logs

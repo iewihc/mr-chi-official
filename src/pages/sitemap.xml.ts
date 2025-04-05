@@ -1,4 +1,3 @@
-import { defineCollection, z } from 'astro:content';
 import type { APIRoute } from 'astro';
 
 const hostname = 'https://mr-chi-tech.com';

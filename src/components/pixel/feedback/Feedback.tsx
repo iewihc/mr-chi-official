@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { feedbacks } from '../data';
 
 interface FeedbackProps {
@@ -7,8 +7,6 @@ interface FeedbackProps {
 }
 
 const Feedback: React.FC<FeedbackProps> = ({ language, oddSection }) => {
-  const [activeFeedbackIndex, setActiveFeedbackIndex] = useState(0);
-
   return (
     <section id="feedback" className={`px-4 py-24 ${oddSection ? 'bg-black' : 'bg-[#0a0a0a]'}`}>
       <div className="container mx-auto">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { cases } from '../data';
 
 interface ProjectsProps {
@@ -7,13 +7,6 @@ interface ProjectsProps {
 }
 
 const Projects: React.FC<ProjectsProps> = ({ language, oddSection }) => {
-  const [activeCaseIndex, setActiveCaseIndex] = useState(0);
-
-  // 手動切換案例
-  const handleCaseChange = (index: number) => {
-    setActiveCaseIndex(index);
-  };
-
   return (
     <section id="projects" className={`px-4 py-24 ${!oddSection ? 'bg-black' : 'bg-[#0a0a0a]'}`}>
       <div className="container mx-auto">

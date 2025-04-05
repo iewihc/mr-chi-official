@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
 import { services } from '../data';
 
@@ -8,13 +8,6 @@ interface ServicesProps {
 }
 
 const Services: React.FC<ServicesProps> = ({ language, oddSection }) => {
-  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
-
-  // 手動切換服務
-  const handleServiceChange = (index: number) => {
-    setActiveServiceIndex(index);
-  };
-
   return (
     <section id="services" className={`py-16 ${oddSection ? 'bg-black' : 'bg-[#0a0a0a]'}`}>
       <div className="container mx-auto px-4">
