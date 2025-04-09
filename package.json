@@ -24,6 +24,7 @@
     "astro": "^5.4.2",
     "astro-compressor": "^1.0.0",
     "astro-seo": "^0.8.4",
+    "gray-matter": "^4.0.3",
     "i18next": "^24.2.3",
     "lucide-react": "^0.483.0",
     "react-i18next": "^15.4.1",

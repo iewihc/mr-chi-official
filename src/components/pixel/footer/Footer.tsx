@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiPhone } from 'react-icons/fi';
+import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
 
 interface FooterProps {
   language: string;
@@ -67,11 +67,11 @@ const Footer: React.FC<FooterProps> = ({ language }) => {
             <h4 className="text-green-400 text-sm font-pixel uppercase mb-4">{language === 'zh' ? '聯絡資訊' : 'Contact'}</h4>
             <ul className="space-y-2">
               <li className="text-gray-400 text-sm flex items-start">
-                <span className="text-green-400 mr-2">✉</span>
+                <span className="text-green-400 mr-2"><FiMail size={14} className="inline-block" /></span>
                 <span>mr.chi.service@gmail.com</span>
               </li>
               <li className="text-gray-400 text-sm flex items-start">
-                <span className="text-green-400 mr-2">📍</span>
+                <span className="text-green-400 mr-2"><FiMapPin size={14} className="inline-block" /></span>
                 <span>{language === 'zh' ? '台北市中山區民生東路二段147巷3之1號B1' : 'B1, No. 3-1, Lane 147, Section 2, Minsheng East Road, Zhongshan District, Taipei City'}</span>
               </li>
               <li className="text-gray-400 text-sm flex items-start">
