@@ -12,7 +12,7 @@ const Services: React.FC<ServicesProps> = ({ language, oddSection }) => {
     <section id="services" className={`py-16 ${oddSection ? 'bg-black' : 'bg-[#0a0a0a]'}`}>
       <div className="container mx-auto px-4">
         <h2 className="pixel-section-title text-center">
-          <span className="text-[#00ffaa] text-shadow-pixel">{language === 'zh' ? '我們的服務' : 'Our Services'}</span>
+          <span className="text-[#4db8ff] text-shadow-pixel">{language === 'zh' ? '我們的服務' : 'Our Services'}</span>
         </h2>
         
         {/* 服務輪播控制按鈕 */}
@@ -27,7 +27,7 @@ const Services: React.FC<ServicesProps> = ({ language, oddSection }) => {
                 }
               }}
             >
-              <FiArrowLeft size={24} />
+              <FiArrowLeft size={24} className="text-[#4db8ff]" />
             </button>
           </div>
           
@@ -58,7 +58,7 @@ const Services: React.FC<ServicesProps> = ({ language, oddSection }) => {
                 }
               }}
             >
-              <FiArrowRight size={24} />
+              <FiArrowRight size={24} className="text-[#4db8ff]" />
             </button>
           </div>
         </div>

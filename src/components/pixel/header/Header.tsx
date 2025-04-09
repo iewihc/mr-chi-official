@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({
           </a>
         </div>
         
-        <div className="pixel-search-container">
+        <div className="pixel-search-container hidden md:block">
           <div className="pixel-search">
             <input 
               type="text" 
@@ -60,19 +60,29 @@ const Header: React.FC<HeaderProps> = ({
           <a href="#about" className="tw-main-content">About</a>
           <a href="#projects" className="tw-main-content">Projects</a>
           <a href="/posts" className="tw-main-content">Blog</a>
-          <button onClick={toggleLanguage} className="pixel-lang-switch">
+          <button onClick={toggleLanguage} className="pixel-lang-switch hidden md:block">
             {language === 'zh' ? 'EN' : '中文'}
           </button>
         </nav>
         
-        <button 
-          className="pixel-mobile-menu-btn" 
-          onClick={toggleMobileMenu}
-          aria-expanded={isMobileMenuOpen}
-          aria-label="Menu"
-        >
-          ☰
-        </button>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={toggleLanguage} 
+            className="pixel-lang-switch-mobile md:hidden"
+            aria-label={language === 'zh' ? "Switch to English" : "切換至中文"}
+          >
+            {language === 'zh' ? 'EN' : '中文'}
+          </button>
+          
+          <button 
+            className="pixel-mobile-menu-btn" 
+            onClick={toggleMobileMenu}
+            aria-expanded={isMobileMenuOpen}
+            aria-label="Menu"
+          >
+            ☰
+          </button>
+        </div>
       </div>
     </header>
   );

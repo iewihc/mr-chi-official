@@ -2775,4 +2775,49 @@ section#home {
     width: 100%;
     max-width: 100px;
   }
+}
+
+/* 中英轉換按鈕樣式 - 手機版 */
+.pixel-lang-switch-mobile {
+  font-family: var(--pixel-font-pixel);
+  font-size: 14px;
+  background-color: #00ff00;
+  color: #000;
+  border: 2px solid #00cc00;
+  padding: 4px 12px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 #006600;
+  transition: all 0.2s ease;
+  image-rendering: pixelated !important;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pixel-lang-switch-mobile:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #006600;
+  background-color: #00cc00;
+}
+
+/* 修改漢堡圖標按鈕樣式，保持一致 */
+.pixel-mobile-menu-btn {
+  font-size: 24px;
+  color: #00ff00;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .pixel-mobile-menu-btn {
+    display: block;
+  }
+  
+  .pixel-header-content {
+    padding: 10px 15px;
+  }
 } 
