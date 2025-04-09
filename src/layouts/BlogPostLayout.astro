@@ -196,6 +196,39 @@ const { frontmatter } = Astro.props;
       color: #fff;
     }
     
+    /* Prose 自定義樣式 */
+    .prose-green {
+      --tw-prose-bullets: #00ff00;
+      --tw-prose-counters: #00ff00;
+    }
+
+    .prose :where(ul):not(:where([class~="not-prose"] *)) {
+      list-style-type: disc;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      padding-left: 1.625em;
+    }
+
+    .prose :where(ol):not(:where([class~="not-prose"] *)) {
+      list-style-type: decimal;
+      margin-top: 1em;
+      margin-bottom: 1em;
+      padding-left: 1.625em;
+    }
+
+    .prose :where(li):not(:where([class~="not-prose"] *)) {
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+    }
+
+    .prose :where(ul > li):not(:where([class~="not-prose"] *))::marker {
+      color: var(--tw-prose-bullets);
+    }
+
+    .prose :where(ol > li):not(:where([class~="not-prose"] *))::marker {
+      color: var(--tw-prose-counters);
+    }
+    
     .pixel-article-content h1, 
     .pixel-article-content h2, 
     .pixel-article-content h3, 
@@ -232,10 +265,25 @@ const { frontmatter } = Astro.props;
     .pixel-article-content ol {
       margin-bottom: 1.5rem;
       padding-left: 1.5rem;
+      list-style-position: outside;
+    }
+    
+    .pixel-article-content ul {
+      list-style-type: disc;
+    }
+    
+    .pixel-article-content ol {
+      list-style-type: decimal;
     }
     
     .pixel-article-content li {
       margin-bottom: 0.5rem;
+      display: list-item;
+    }
+    
+    .pixel-article-content ul li::marker,
+    .pixel-article-content ol li::marker {
+      color: #00ff00;
     }
     
     .pixel-article-content blockquote {
@@ -611,7 +659,7 @@ const { frontmatter } = Astro.props;
         )}
       </header>
       
-      <div class="pixel-article-content">
+      <div class="pixel-article-content prose prose-invert prose-green max-w-none">
         <slot />
       </div>
     </article>

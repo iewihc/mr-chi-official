@@ -198,16 +198,16 @@ function PixelMain() {
       <Feedback language={language} oddSection={oddSection} />
 
       {/* 關於我們區段 */}
-      <About language={language} oddSection={oddSection} />
+      {/* <About language={language} oddSection={oddSection} /> */}
 
       {/* DevOps開發流程圖 */}
       <Devops language={language} oddSection={oddSection} />
 
-      {/* 常見問題 */}
-      <Faq language={language} oddSection={oddSection} />
-
       {/* 文章區段 */}
       <Articles language={language} oddSection={oddSection} />
+
+      {/* 常見問題 */}
+      <Faq language={language} oddSection={oddSection} />
 
       {/* 頁腳 */}
       <Footer language={language} />

@@ -27,7 +27,7 @@ const Articles: React.FC<ArticlesProps> = ({ language, oddSection }) => {
             </p>
             <div className="mt-auto flex justify-between items-center">
               <span className="text-gray-500 text-xs">2023-10-15</span>
-              <a href="/posts/erp-guide" className="text-green-400 hover:text-green-300 text-sm">{language === 'zh' ? '閱讀更多' : 'Read More'}</a>
+              <a href="/posts/erp-guide" className="text-green-400 hover:text-green-300 text-sm px-3 py-1">{language === 'zh' ? '閱讀更多' : 'Read More'} &rarr;</a>
             </div>
           </div>
           
@@ -41,7 +41,7 @@ const Articles: React.FC<ArticlesProps> = ({ language, oddSection }) => {
             </p>
             <div className="mt-auto flex justify-between items-center">
               <span className="text-gray-500 text-xs">2023-09-22</span>
-              <a href="/posts/web-trends" className="text-green-400 hover:text-green-300 text-sm">{language === 'zh' ? '閱讀更多' : 'Read More'}</a>
+              <a href="/posts/web-trends" className="text-green-400 hover:text-green-300 text-sm px-3 py-1">{language === 'zh' ? '閱讀更多' : 'Read More'} &rarr;</a>
             </div>
           </div>
           
@@ -55,7 +55,7 @@ const Articles: React.FC<ArticlesProps> = ({ language, oddSection }) => {
             </p>
             <div className="mt-auto flex justify-between items-center">
               <span className="text-gray-500 text-xs">2023-08-30</span>
-              <a href="/posts/digital-transformation" className="text-green-400 hover:text-green-300 text-sm">{language === 'zh' ? '閱讀更多' : 'Read More'}</a>
+              <a href="/posts/digital-transformation" className="text-green-400 hover:text-green-300 text-sm px-3 py-1">{language === 'zh' ? '閱讀更多' : 'Read More'} &rarr;</a>
             </div>
           </div>
         </div>
