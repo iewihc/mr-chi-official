@@ -57,7 +57,7 @@ const Projects: React.FC<ProjectsProps> = ({ language, oddSection }) => {
                 {/* 項目縮圖 */}
                 <div className="relative overflow-hidden h-48">
                   <img 
-                    src={projectImages[index % projectImages.length]} 
+                    src={caseItem.image || projectImages[index % projectImages.length]} 
                     alt={language === 'zh' ? caseItem.title : caseItem.englishTitle}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />

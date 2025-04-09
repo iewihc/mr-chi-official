@@ -7,13 +7,6 @@ import type { ServiceItem, CaseItem, Feedback, DevOpsStep } from './types';
 // 服務數據
 export const services: ServiceItem[] = [
   {
-    title: "創意LOGO設計",
-    englishTitle: "Creative Logo Design",
-    description: "建立獨特品牌識別，讓您在市場中脫穎而出。",
-    englishDescription: "Establish a unique brand identity that makes you stand out in the market.",
-    icon: <i className="fas fa-paint-brush"></i>
-  },
-  {
     title: "全端網站開發",
     englishTitle: "Full-Stack Web Development",
     description: "建立獨特品牌識別，讓您在市場中脫穎而出。",
@@ -28,18 +21,18 @@ export const services: ServiceItem[] = [
     icon: <i className="fas fa-network-wired"></i>
   },
   {
+    title: "創意LOGO設計",
+    englishTitle: "Creative Logo Design",
+    description: "建立獨特品牌識別，讓您在市場中脫穎而出。",
+    englishDescription: "Establish a unique brand identity that makes you stand out in the market.",
+    icon: <i className="fas fa-paint-brush"></i>
+  },
+  {
     title: "DevOps服務",
     englishTitle: "DevOps Services",
     description: "建立獨特品牌識別，讓您在市場中脫穎而出。",
     englishDescription: "Establish a unique brand identity that makes you stand out in the market.",
     icon: <i className="fas fa-sync-alt"></i>
-  },
-  {
-    title: "UI/UX設計",
-    englishTitle: "UI/UX Design",
-    description: "建立獨特品牌識別，讓您在市場中脫穎而出。",
-    englishDescription: "Establish a unique brand identity that makes you stand out in the market.",
-    icon: <i className="fas fa-pencil-ruler"></i>
   },
   {
     title: "技術顧問",
@@ -53,35 +46,38 @@ export const services: ServiceItem[] = [
 // 案例數據
 export const cases: CaseItem[] = [
   {
-    title: "製造業自動化報表",
-    englishTitle: "Manufacturing Automated Reports",
-    description: "為製造商打造自動化報表系統，將每天3小時的Excel統計工作縮短至5分鐘，錯誤率歸零。",
-    englishDescription: "Created an automated reporting system for manufacturers, reducing daily Excel statistics work from 3 hours to 5 minutes with zero error rate.",
-    frontendTech: "React",
-    backendTech: "Node.js"
-  },
-  {
-    title: "教育機構線上報名系統",
-    englishTitle: "Educational Institution Online Registration System",
-    description: "為教育機構開發線上報名與後台管理系統，節省70%行政時間，提升用戶體驗。",
-    englishDescription: "Developed an online registration and backend management system for educational institutions, saving 70% of administrative time and improving user experience.",
+    title: "廢棄物物理處理ERP",
+    englishTitle: "ERP for Physical Waste Treatment",
+    description: "為廢棄物中間處理場打造自動化進出場與報表後台系統，整合資料輸入與統計儀表板，將每日6小時人工作業壓縮至5分鐘，有效提升效率與準確度。",
+    englishDescription: "Developed an automated reporting system for a physical waste treatment center specializing in industrial waste classification and recycling, reducing daily Excel-based statistical work from 3 hours to just 5 minutes, achieving zero manual error.",
     frontendTech: "Vue",
-    backendTech: "Python"
+    backendTech: "Python",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=900&auto=format&fit=crop"
   },
   {
-    title: "醫療設備管理平台",
-    englishTitle: "Medical Equipment Management Platform",
-    description: "為醫療單位建立設備管理系統，實現庫存追蹤與維護排程，提高運營效率。",
-    englishDescription: "Established an equipment management system for medical units to achieve inventory tracking and maintenance scheduling, improving operational efficiency.",
-    frontendTech: "Angular",
-    backendTech: ".NET"
+    title: "智能車牌辨識系統",
+    englishTitle: "Intelligent License Plate Recognition System",
+    description: "協助警察局於違停熱區部署智能車牌辨識系統，透過YOLO演算法即時辨識車牌、自動記錄違規資訊，並串接開單系統實現自動舉發，有效減少人力巡查與漏報情形。",
+    englishDescription: "Deployed an intelligent license plate recognition system in illegal parking zones to assist the police. Using YOLO for real-time detection, the system automatically logs violations and integrates with the ticketing system for automated penalty issuance, reducing manual patrol and missed reports.",
+    frontendTech: "Vue",
+    backendTech: "Python",
+    image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=900&auto=format&fit=crop"
+  },  
+  {
+    title: "圖書館繪本資料庫系統",
+    englishTitle: "Dream Picture Book Platform",
+    description: "由國立公共資訊圖書館推動的繪本創作平台，鼓勵學生發表原創作品並展示於線上資料庫，系統以.NET建構，支援作品上傳、瀏覽與後台審核功能。",
+    englishDescription: "A picture book creation platform initiated by the National Library of Public Information, designed to promote student originality and showcase creative works. Built with ASP.NET, the system supports submission, browsing, and backend review of picture book entries.",
+    frontendTech: "React",
+    backendTech: ".NET",
+    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?q=80&w=900&auto=format&fit=crop"
   }
 ];
 
 // 客戶反饋數據
 export const feedbacks: Feedback[] = [
   {
-    name: "貿易公司業主",
+    name: "東元國際",
     englishName: "Trading Company Owner",
     company: "台灣貿易企業",
     englishCompany: "Taiwan Trading Enterprise",

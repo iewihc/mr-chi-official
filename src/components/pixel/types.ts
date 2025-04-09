@@ -15,6 +15,7 @@ export interface CaseItem {
   englishDescription: string;
   frontendTech: string;
   backendTech: string;
+  image?: string; // 案例縮圖路徑
 }
 
 // 客戶反饋介面
