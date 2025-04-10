@@ -14,7 +14,7 @@ const pages = [
   { url: '/posts/ecommerce-platform', lastmod: new Date().toISOString() },
   { url: '/posts/erp-integration', lastmod: new Date().toISOString() },
   { url: '/posts/react-vs-vue', lastmod: new Date().toISOString() },
-  { url: '/posts/restaurant-logo-design', lastmod: new Date().toISOString() },
+  { url: '/posts/logo-design', lastmod: new Date().toISOString() },
   { url: '/posts/astro-in-brief', lastmod: new Date().toISOString() },
   { url: '/posts/business-card-design', lastmod: new Date().toISOString() },
 ];
